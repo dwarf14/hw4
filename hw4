@@ -1,0 +1,51 @@
+import java.util.Iterator;
+import java.util.TreeMap;
+
+public class TreeSet<E> implements Iterable<E> {
+
+    private TreeMap<E, Object> map;
+
+    private static final Object DUMMY = new Object();
+
+    public TreeSet() {
+        map = new TreeMap<>();
+    }
+
+    public boolean contains(E element) {
+        return map.containsKey(element);
+    }
+
+    public boolean add(E element) {
+        return map.put(element, DUMMY) == null;
+    }
+
+    public boolean remove(E element) {
+        return map.remove(element) == DUMMY;
+    }
+
+    public int size() {
+        return map.size();
+    }
+
+    public void clear() {
+        map.clear();
+        
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return map.keySet().iterator();
+        
+    }
+
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(1);
+        set.add(5);
+        set.add(10);
+
+        System.out.println(set.contains(5)); // true
+        set.remove(5);
+        System.out.println(set.contains(5)); // false
+    }
+}
